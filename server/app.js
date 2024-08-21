@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const sessionStore = require('./prisma/db/index');
+const sessionStore = require('./prisma/db/index').sessionStore;
 const session = require('express-session');
 const cors = require('cors');
 const passport = require('passport');
@@ -28,6 +28,8 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+
+require('./config/passport')
 app.use(passport.initialize());
 app.use(passport.session());
 

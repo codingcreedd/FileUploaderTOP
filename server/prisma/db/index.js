@@ -13,4 +13,5 @@ const sessionStore = new PrismaSessionStore(
     }
 );
 
-module.exports = sessionStore;
+module.exports.sessionStore = sessionStore;
+module.exports.prisma_client = prisma;
