@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const passwordUtils = require('../lib/passwordUtils')
 
@@ -15,11 +15,13 @@ router.post('/signup', async (req, res) => {
         const salt = hashSalt.salt;
 
         await prisma.user.create({
-            first_name,
-            last_name,
-            email,
-            hashpassword,
-            salt
+            data: {
+                first_name,
+                last_name,
+                email,
+                hashpassword,
+                salt
+            }
         });
 
         res.status(201).json({message: 'User created successfuly'});
