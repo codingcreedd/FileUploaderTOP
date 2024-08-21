@@ -38,7 +38,9 @@ app.use((req, res, next) => {
 
 
 //ROUTES
+const logs = require('./routes/logs');
 
+app.use('/logs', logs);
 
 const port = process.env.PORT;
 app.listen(port, () => {
