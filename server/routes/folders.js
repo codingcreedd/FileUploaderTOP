@@ -3,9 +3,14 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const router = require('express').Router();
 
-router.get('/', async (req, res) => {
+router.get('/:user_id/all-folders', async (req, res) => {
+    const {user_id} = req.params;
     try {
-        const folders = await prisma.folder.findMany();
+        const folders = await prisma.folder.findMany({
+            where: {
+                userId: Number(user_id)
+            }
+        });
         
         if(folders) {
             res.status(200).json({
@@ -56,10 +61,17 @@ router.delete('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const {id} = req.params;
+        console.log(`Deleting folder of id ${id}`)
         await prisma.folder.delete({
             where: {
-                id: id
+                id: Number(id)
             }
+        })
+        .then(response => {
+            res.status(200).json({
+                message: 'Deleted folder successfuly',
+                deleted_folder: response
+            })
         })
     } catch(err) {
         console.log(err);
@@ -93,10 +105,11 @@ router.post('/', async (req, res) => {
 //Update
 router.put('/:id', async (req, res) => {
     try {
+        console.log('Updating...')
         const {id} = req.params;
-        await prisma.folder.update({
+        const response = await prisma.folder.update({
             where: {
-                id: id
+                id: Number(id)
             },
             data: {
                 name: req.body.name,
@@ -104,8 +117,13 @@ router.put('/:id', async (req, res) => {
                 userId: req.body.user_id
             }
         })
+
+        res.status(201).json({
+            message: 'Updated Folder Successfuly',
+            updated_folder: response
+        })
     } catch(err) {
-        req.status(500).json({
+        res.status(500).json({
             message: 'Cannot update folder'
         })
         console.log(err);

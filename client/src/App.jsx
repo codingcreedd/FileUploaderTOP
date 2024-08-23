@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react'
 import { Context } from './components/ContextProvider'
 import logs from './apis/logs';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import Nav from './components/Nav';
 
 function App() {
 
@@ -9,31 +10,15 @@ function App() {
 
   const navigate = useNavigate();
 
-  const logOut = async () => {
-    try {
-      await logs.get('/logout')
-        .then(() => {
-          setAuthState(false);
-          navigate('/signin');
-        })
-    } catch(err) {
-      console.log(err);
-    }
-  }
-
   return (
-    <div className=''>
+    <div className='flex'>
+      <Nav />
        {
-          authState ? (
-            <div>
-                Welcome back {user.first_name}!
-                <button onClick={logOut}>Logout</button>
+          authState && (
+            <div className='px-10 py-10 rounded-tl-2xl w-[80%] bg-gray-100'>
+              <Outlet />
             </div>
-          ) : (
-            <div>
-              
-            </div>
-          )
+          ) 
        }
     </div>
   )

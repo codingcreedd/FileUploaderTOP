@@ -20,7 +20,7 @@ const SignUpForm = () => {
         email,
         password
       })
-        .then(() => {
+        .then(response => {
           navigate('/signin');
         })
     } catch(err) {
