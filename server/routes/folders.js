@@ -9,6 +9,10 @@ router.get('/:user_id/all-folders', async (req, res) => {
         const folders = await prisma.folder.findMany({
             where: {
                 userId: Number(user_id)
+            },
+            include: {
+                files: true,
+                user: true
             }
         });
         
@@ -30,10 +34,11 @@ router.get('/:id', async (req, res) => {
         const {id} = req.params;
         const folder = await prisma.folder.findUnique({
             where: {
-                id: id
+                id: Number(id)
             },
             include: {
-                files: true
+                files: true,
+                user: true
             }
         });
 

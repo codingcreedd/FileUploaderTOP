@@ -34,7 +34,6 @@ const FolderList = () => {
 
     const updateFolder = async (e) => {
         e.preventDefault();
-        console.log(updatedFolder)
         try {
             console.log('updating folder...')
             await folders_api.put(`/${updatedFolder}`, {
@@ -42,8 +41,6 @@ const FolderList = () => {
                 description: description,
                 user_id: user.id
             }).then(response => {
-                console.log(user);
-                console.log(response)
                 navigate(0);
             })
                 
@@ -138,7 +135,7 @@ const FolderList = () => {
             <div className='grid grid-cols-5'>
                 {
                     folders.map(folder => (
-                        <div key={folder?.id} className='relative flex flex-col cursor-pointer px-10 py-10 items-center max-w-[250px] bg-white rounded-2xl'>
+                        <Link to={`${folder.id}/details`} key={folder?.id} className='relative flex flex-col cursor-pointer px-10 py-10 items-center max-w-[250px] bg-white rounded-2xl'>
                             <i className='bx bx-folder text-[3rem]' ></i>
                             <p className='mt-5 text-xl font-bold'>{folder?.name}</p>
                             <p className='font-bold text-sm text-gray-600 mt-4'>{folder?.files} Files</p>
@@ -149,7 +146,7 @@ const FolderList = () => {
                                 onClick={() => {setUpdateForm(true); setName(folder?.name); setDescription(folder.description); setUpdatedFolder(folder?.id)}}>Update</button>
                                 ) : (null)
                             }
-                        </div>
+                        </Link>
                     ))
                 }
             </div>

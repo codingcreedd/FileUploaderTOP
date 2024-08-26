@@ -37,7 +37,7 @@ const LogInForm = () => {
       <h1 className="text-3xl font-bold mb-4">Sign In</h1>
       <div className="mb-10">
         Don't have an account?{' '}
-        <Link to="/signup" className="text-sm text-blue-800 underline">
+        <Link to="/signup" className="text-sm text-gray-500 underline">
           Click here to sign up
         </Link>
       </div>
@@ -52,7 +52,7 @@ const LogInForm = () => {
                 value={email}
                 required
                 onChange={(e) => setEmail(e.target.value)}
-                className="border border-blue-800 outline-none px-4 py-2 rounded-lg"
+                className="border border-black outline-none px-4 py-2 rounded-lg"
               />
             </div>
 
@@ -64,12 +64,12 @@ const LogInForm = () => {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border border-blue-800 outline-none px-4 py-2 rounded-lg"
+                className="border border-black outline-none px-4 py-2 rounded-lg"
               />
             </div>
         <button
           type="submit"
-          className="w-full bg-blue-800 hover:bg-blue-500 text-white py-3 rounded-lg font-bold text-lg transition-all duration-300"
+          className="w-full bg-black hover:bg-white hover:text-black hover:border-black hover:border text-white py-3 rounded-lg font-bold text-lg transition-all duration-300"
         >
           Sign In
         </button>

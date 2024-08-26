@@ -10,12 +10,16 @@ const ContextProvider = ({children}) => {
     const [userId, setUserId] = useState(0);
     const [user, setUser] = useState({});
     const [folders, setFolders] = useState([]);
+    const [uploadFile, setUploadFile] = useState(false);
+    const [files, setFiles] = useState(null);
 
     const states = {
         authState, setAuthState,
         userId, setUserId,
         user, setUser,
         folders, setFolders,
+        uploadFile, setUploadFile,
+        files, setFiles
     }
 
     let hasFetched = false;
@@ -25,13 +29,14 @@ const ContextProvider = ({children}) => {
         const fetchData = async () => {
           var response = await logs.get(`/protected`)
           
-          setUser(response.data.user);
-          setAuthState(true);
-
-          console.log(response.data.user)
-          var response2 = await folders_api.get(`/${response.data.user.id}/all-folders`)
-          setFolders(response2.data.folders);
-
+          if(response.data.message === 'Authenticated') {
+            setUser(response.data.user);
+            setAuthState(true);
+            setFolders(response.data.folders)
+            setFiles(response.data.folders.files);
+          } else {
+            setAuthState(false)
+          }
         }
         
         fetchData();

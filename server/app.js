@@ -42,9 +42,11 @@ app.use((req, res, next) => {
 //ROUTES
 const logs = require('./routes/logs');
 const folders = require('./routes/folders');
+const files = require('./routes/files');
 
 app.use('/logs', logs);
 app.use('/folders', folders);
+app.use('/files', files);
 
 const port = process.env.PORT;
 app.listen(port, () => {

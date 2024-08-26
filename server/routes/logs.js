@@ -43,11 +43,24 @@ router.post('/signin', passport.authenticate('local'), (req, res) => {
 });
 
 
-router.get('/protected', (req, res) => {
-    if (req.isAuthenticated()) {
-        res.status(200).json({ user: req.user });
-    } else {
-        res.status(401).json({ message: 'Not authenticated' });
+router.get('/protected', async (req, res) => {
+    try {
+        if (req.isAuthenticated()) {
+            const id = req.user.id;
+            const folders = await prisma.folder.findMany({
+                where: {
+                    userId: id
+                },
+                include: {
+                    user: true
+                }
+            });
+            res.status(200).json({ message: 'Authenticated', user: req.user, folders: folders });
+        } else {
+            res.status(401).json({ message: 'Not authenticated' });
+        }
+    } catch(err) {
+        console.log(err);
     }
 });
 

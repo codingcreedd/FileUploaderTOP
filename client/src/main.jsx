@@ -8,6 +8,7 @@ import Log from './Routes/Log.jsx';
 import Storage from './Routes/Storage.jsx'
 import AddFolder from './components/AddFolder.jsx';
 import FolderList from './components/FolderList.jsx';
+import FolderDetails from './components/FolderDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
           {
             path: '',
             element: <FolderList />
+          },
+          {
+            path: ':folder_id/details',
+            element: <FolderDetails />
           }
         ]
       }

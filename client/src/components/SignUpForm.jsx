@@ -35,7 +35,7 @@ const SignUpForm = () => {
         <h1 className="text-4xl font-bold mb-6">Sign Up</h1>
         <p className="mb-8">
           Have an account?{' '}
-          <Link to="/signin" className="text-blue-800 hover:text-blue-400 underline">
+          <Link to="/signin" className="text-gray-500 hover:text-black underline">
             Click here to sign in
           </Link>
         </p>
@@ -50,7 +50,7 @@ const SignUpForm = () => {
                 value={firstName}
                 required
                 onChange={(e) => setFirstName(e.target.value)}
-                className="border border-blue-800 outline-none px-4 py-2 rounded-lg"
+                className="border border-black outline-none px-4 py-2 rounded-lg"
               />
             </div>
 
@@ -63,7 +63,7 @@ const SignUpForm = () => {
                 value={lastName}
                 required
                 onChange={(e) => setLastName(e.target.value)}
-                className="border border-blue-800 outline-none px-4 py-2 rounded-lg"
+                className="border border-black outline-none px-4 py-2 rounded-lg"
               />
             </div>
 
@@ -76,7 +76,7 @@ const SignUpForm = () => {
                 value={email}
                 required
                 onChange={(e) => setEmail(e.target.value)}
-                className="border border-blue-800 outline-none px-4 py-2 rounded-lg"
+                className="border border-black outline-none px-4 py-2 rounded-lg"
               />
             </div>
 
@@ -88,13 +88,13 @@ const SignUpForm = () => {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border border-blue-800 outline-none px-4 py-2 rounded-lg"
+                className="border border-black outline-none px-4 py-2 rounded-lg"
               />
             </div>
 
           <button
             type="submit"
-            className="px-4 bg-blue-800 hover:bg-blue-500 text-white py-3 rounded-lg font-bold text-lg transition-all duration-300"
+            className="px-4 bg-black hover:bg-white hover:text-black hover:border hover:border-black text-white py-3 rounded-lg font-bold text-lg transition-all duration-300"
           >
             Create Account
           </button>
