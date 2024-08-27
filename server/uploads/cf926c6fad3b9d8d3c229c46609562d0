@@ -1,0 +1,17 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+//Riham Hassan
+
+int evalPolynomial(int a, int b, int c, int d, int x)
+{
+  return (a * pow(x, 3)) + (b * pow(x, 2)) + (c*x) + d;
+}
+
+int main()
+{
+  cout << evalPolynomial(2,5,7,6,10) << endl;
+  
+  return 0;
+}

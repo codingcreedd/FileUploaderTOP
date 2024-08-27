@@ -32,7 +32,8 @@ const Storage = () => {
                 }
             }).then(response => {
                 if(response.data.message === 'Added File Successfully') {
-                    navigate(`home`)
+                    navigate(`/home`)
+                    navigate(0)
                 }
             })
         } catch(err) {

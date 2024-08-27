@@ -23,7 +23,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
         const filePath = path.resolve(file.path);
         const {data, error} = await supabase.storage
             .from("uploads")
-            .upload(`${file.filename}`, file.buffer, {
+            .upload(`${file.filename}`, file.stream, {
                 cacheControl: '3600',
                 upsert: false
             });
@@ -64,6 +64,32 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 //Read a file
 
 //Update a file
+router.put('/:id/update', async (req, res) => {
+    try {
+        const {id} = req.params;
+        const update_response = await prisma.file.update({
+            where: {
+                id: Number(id)
+            }, 
+            data: {
+                name: req.body.name
+            }
+        });
+
+        if(update_response) {
+            res.status(201).json({
+                message: 'Updated file successfully',
+                updated_file: update_response
+            });
+        } else {
+            res.status(500).json({message: 'Error updating file'});
+        }
+
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({message: 'Could not update file'});
+    }
+})
 
 //Delete a file
 
